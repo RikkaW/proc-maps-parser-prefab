@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.library'
+    id 'com.vanniktech.maven.publish'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_STL=none"
+            }
+        }
+    }
+    buildFeatures {
+        androidResources false
+        prefabPublishing true
+        buildConfig false
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+    prefab {
+        "proc-maps-parser" {
+            headers "src/main/cpp/include"
+        }
+    }
+}
+
+ext {
+    POM_NAME = "proc maps parser Prefab"
+    POM_DESCRIPTION = "Prefab package for proc_maps_parser (https://github.com/ouadev/proc_maps_parser)."
+}
